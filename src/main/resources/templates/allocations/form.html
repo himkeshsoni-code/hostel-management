@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Allocate Room | Hostel Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+<div class="container py-4" style="max-width: 620px;">
+
+    <h3 class="mb-3">Allocate Room</h3>
+
+    <div th:if="${#lists.isEmpty(students)}" class="alert alert-warning">
+        Every student already has a room.
+    </div>
+    <div th:if="${#lists.isEmpty(rooms)}" class="alert alert-warning">
+        No rooms with free beds are available.
+    </div>
+
+    <form th:action="@{/allocations/save}" method="post" class="bg-white p-4 shadow-sm rounded">
+        <div class="mb-3">
+            <label class="form-label">Student (without a room)</label>
+            <select name="studentId" class="form-select" required>
+                <option value="">Select student</option>
+                <option th:each="s : ${students}" th:value="${s.studentId}"
+                        th:text="|${s.name} (${s.rollNo}) - ${s.gender}|"></option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Room (with free beds)</label>
+            <select name="roomId" class="form-select" required>
+                <option value="">Select room</option>
+                <option th:each="r : ${rooms}" th:value="${r.roomId}"
+                        th:text="|${r.hostel.name} (${r.hostel.type}) - Room ${r.roomNo} - ${r.capacity - r.occupied} free|"></option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Allocate</button>
+        <a th:href="@{/allocations}" class="btn btn-link">Cancel</a>
+    </form>
+</div>
+</body>
+</html>
