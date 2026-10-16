@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<nav th:fragment="navbar" class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/students}">Hostel Mgmt</a>
+        <ul class="navbar-nav me-auto flex-wrap">
+            <li class="nav-item"><a class="nav-link" th:href="@{/students}">Students</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/hostels}">Hostels</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/rooms}">Rooms</a></li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
