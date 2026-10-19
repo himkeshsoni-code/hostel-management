@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Goes in <head> of every page, before the CSS -->
+<script th:fragment="theme-init">
+  (function () {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-bs-theme', saved || (prefersDark ? 'dark' : 'light'));
+  })();
+</script>
+
+<!-- Goes just before </body> on every page -->
+<script th:fragment="theme-toggle">
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    if (!btn) return; // login page has no navbar
+    var icon = btn.querySelector('i');
+
+    function setTheme(theme) {
+      root.setAttribute('data-bs-theme', theme);
+      localStorage.setItem('theme', theme);
+      icon.className = theme === 'dark' ? 'bi bi-sun-fill' : 'bi bi-moon-stars-fill';
+    }
+
+    setTheme(root.getAttribute('data-bs-theme'));
+    btn.addEventListener('click', function () {
+      setTheme(root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark');
+    });
+  })();
+</script>
+
+</body>
+</html>

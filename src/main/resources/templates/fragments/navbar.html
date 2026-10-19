@@ -1,28 +1,75 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" th:href="@{/students}">Hostel</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <span class="navbar-toggler-icon"></span>
+<div th:fragment="navbar">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+ 
+    <style>
+        body { padding-top: 56px; padding-left: 64px; }
+ 
+        .topbar {
+            position: fixed; top: 0; left: 0; right: 0; height: 56px;
+            background: #212529; color: #fff; z-index: 1030;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 16px;
+        }
+        .topbar img { height: 36px; }
+        .topbar .who { color: #adb5bd; margin-right: 12px; }
+ 
+        .sidebar {
+            position: fixed; top: 56px; left: 0; bottom: 0;
+            width: 64px; background: #212529; overflow: hidden;
+            transition: width .2s ease; z-index: 1020; padding-top: 8px;
+        }
+        .sidebar:hover { width: 220px; box-shadow: 4px 0 12px rgba(0, 0, 0, .35); }
+ 
+        .sidebar a {
+            display: flex; align-items: center; gap: 18px;
+            padding: 12px 22px; color: #adb5bd;
+            text-decoration: none; white-space: nowrap;
+        }
+        .sidebar a i { font-size: 1.25rem; min-width: 20px; text-align: center; }
+        .sidebar a span { opacity: 0; transition: opacity .15s ease; }
+        .sidebar:hover a span { opacity: 1; }
+        .sidebar a:hover { background: #343a40; color: #fff; }
+        .sidebar a.active { background: #343a40; color: #fff; border-left: 3px solid #fd7e14; padding-left: 19px; }
+    </style>
+ 
+    <header class="topbar">
+    <a th:href="@{/students}">
+        <img th:src="@{/images/logo.png}" alt="logo">
+    </a>
+    <div class="d-flex align-items-center">
+        <span class="who" th:if="${session.warden != null}" th:text="${session.warden.name}">Warden</span>
+
+        <button id="themeToggle" class="btn btn-outline-light btn-sm me-2" type="button" title="Toggle theme">
+            <i class="bi bi-moon-stars-fill"></i>
         </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" th:href="@{/students}">Students</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/hostels}">Hostels</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/rooms}">Rooms</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/allocations}">Allocations</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/fees}">Fees</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/complaints}">Complaints</a></li>
-                <li class="nav-item"><a class="nav-link" th:href="@{/visitors}">Visitors</a></li>
-            </ul>
-            <span class="navbar-text me-3" th:if="${session.warden != null}"
-                  th:text="${session.warden.name}">Warden</span>
-            <a class="btn btn-outline-light btn-sm" th:href="@{/logout}">Logout</a>
-        </div>
+
+        <a class="btn btn-outline-light btn-sm" th:href="@{/logout}" title="Logout">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
     </div>
-</nav>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</header>
+ 
+    <aside class="sidebar">
+        <a th:href="@{/students}"    title="Students">   <i class="bi bi-people"></i>               <span>Students</span></a>
+        <a th:href="@{/hostels}"     title="Hostels">    <i class="bi bi-building"></i>             <span>Hostels</span></a>
+        <a th:href="@{/rooms}"       title="Rooms">      <i class="bi bi-door-open"></i>            <span>Rooms</span></a>
+        <a th:href="@{/allocations}" title="Allocations"><i class="bi bi-key"></i>                  <span>Allocations</span></a>
+        <a th:href="@{/fees}"        title="Fees">       <i class="bi bi-cash-coin"></i>            <span>Fees</span></a>
+        <a th:href="@{/complaints}"  title="Complaints"> <i class="bi bi-exclamation-triangle"></i> <span>Complaints</span></a>
+        <a th:href="@{/visitors}"    title="Visitors">   <i class="bi bi-person-badge"></i>         <span>Visitors</span></a>
+        <a th:href="@{/reports}"     title="Reports">    <i class="bi bi-bar-chart"></i>            <span>Reports</span></a>
+    </aside>
+ 
+    <script>
+        document.querySelectorAll('.sidebar a').forEach(function (a) {
+            if (location.pathname.indexOf(a.getAttribute('href')) === 0) {
+                a.classList.add('active');
+            }
+        });
+    </script>
+</div>
 </body>
 </html>

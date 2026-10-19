@@ -104,10 +104,12 @@ INSERT INTO room (hostel_id, room_no, floor, capacity) VALUES
 (2,'G01',0,2),(2,'G02',0,3),(2,'F01',1,2);
 
 INSERT INTO student (roll_no,name,gender,dept,year,phone,email,guardian_name,guardian_phone) VALUES
-('CS101','Rahul Verma','M','CSE',2,'9000000001','rahul@college.edu','Mr. Verma','9100000001'),
-('CS102','Amit Singh','M','CSE',2,'9000000002','amit@college.edu','Mr. Singh','9100000002'),
-('EC201','Priya Nair','F','ECE',1,'9000000003','priya@college.edu','Mr. Nair','9100000003'),
-('ME301','Sneha Rao','F','MECH',3,'9000000004','sneha@college.edu','Mr. Rao','9100000004');
+('CS101','HIMKESH SONI','M','CSE',2,'9000000001','himkesh@college.edu','Mr. Soni','9100000001'),
+('CS102','ANUBHAV BANSLA','M','CSE',2,'9000000002','anubhav@college.edu','Mr. Bansla','9100000002'),
+('EC201','PREKSHA JAIN','F','ECE',1,'9000000003','preksha@college.edu','Mr. Jain','9100000003'),
+('MECH103','SHRESHTH KHATRI','M','MECH',3,'9000000014','shreshth@college.edu','Mr. Khatri','9100000014'),
+('ECE2O2','MAYANK KASHYAP','M','ECE',1,'9000000024','mayank@college.edu','Mr. Kashyap','9100000024'),
+('CSE104','SATAKSHI SHARMA','F','CSE',4,'9000000034','satakshi@college.edu','Mr. Sharma ','9100000034');
 
 INSERT INTO allocation (student_id, room_id, alloc_date) VALUES
 (1,1,'2026-08-01'),(2,1,'2026-08-01'),(3,5,'2026-08-02');
